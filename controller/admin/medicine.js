@@ -29,7 +29,7 @@ export async function MakeMedicinine(req, res, next) {
     const { M_NUM, M_NAME, M_CORP, M_TYPE, M_MARK_FRONT, M_MARK_BACK, M_COLOR_FRONT, M_COLOR_BACK, M_CHARACTER, M_AXIS_LONG, M_AXIS_SHORT, M_THICKNESS, M_IMAGE } = req.body
     const found = await medicineRepository.findByNum(M_NUM)
     if(found){
-        res.status(401).json({message:`${M_NUM}는 이미 존재하는 약품입니다.` })
+        res.status(401).json({message:`이미 존재하는 약품` })
     }else{
     const result = await medicineRepository.create({
         M_NUM,
