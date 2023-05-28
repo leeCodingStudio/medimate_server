@@ -6,6 +6,7 @@ import { sequelize } from './db/database.js';
 import bodyParser from 'body-parser';
 import adminRouter from './router/admin/admin.js';
 import mainRouter from './router/main/main.js';
+import { adminIsAuth } from './middleware/adminToken.js';
 
 const app = express();
 const corsOprtion = {
@@ -20,7 +21,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // router
-app.use('/admin', adminRouter);
+app.use('/admin', adminIsAuth, adminRouter);
 app.use('/main', mainRouter);
 
 // 에러 페이지
