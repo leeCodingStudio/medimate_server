@@ -8,16 +8,19 @@ import calendarRouter from './calendar.js'
 import pharmRouter from './pharm.js'
 import findRouter from './find.js'
 import announcementRouter from './announcement.js'
+import adminCheckRouter from './adminCheck.js'
+import { isAuth } from '../../middleware/token.js';
 
 const router = express.Router();
 
 router.use('/login', loginRouter);
 router.use('/join', joinRouter);
 router.use('/medicine',medicineRouter);
-router.use('/mypage',mypageRouter);
-router.use('/calendar',calendarRouter)
+router.use('/mypage', isAuth, mypageRouter);
+router.use('/calendar', isAuth, calendarRouter)
 router.use('/pharm',pharmRouter)
 router.use('/find',findRouter)
 router.use('/announcement',announcementRouter)
+router.use('/adminCheck',adminCheckRouter)
 
 export default router;
