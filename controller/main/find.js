@@ -6,9 +6,12 @@ export async function findId(req, res){
     const { U_NAME, U_EMAIL } = req.body;
     console.log(U_NAME);
 
-    const data = await findRepository.getId(U_NAME, U_EMAIL);
-
-    res.status(200).json(data);
+    const user = await findRepository.getId(U_NAME, U_EMAIL);
+    if(user){
+        res.status(200).json(user);
+    }else{
+        res.status(404).json({ message: `해당 이메일과 이름을 가진 회원이 없음`});
+    }
 }
 
 export async function findPw(req, res){
@@ -20,6 +23,6 @@ export async function findPw(req, res){
         const updated = await findRepository.getPw(U_ID, hashed);
         res.status(200).json(updated);
     }else{
-        res.status(404).json({ message: `${U_NUM}번호 회원은 없습니다`});
+        res.status(404).json({ message: `해당 아이디와 이메일, 이름을 가진 회원이 없음`});
     }
 }
